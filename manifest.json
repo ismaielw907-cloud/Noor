@@ -1,0 +1,18 @@
+{
+  "name": "نور — المصحف والأذكار",
+  "short_name": "نور",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b3d2e",
+  "theme_color": "#0b3d2e",
+  "description": "تطبيق نور للقرآن والأذكار",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,[STRIPPED]",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
