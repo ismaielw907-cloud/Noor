@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نور - المصحف والأذكار</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,Tajawal;background:#fdfbf7;color:#0b3d2e;padding-bottom:80px}
+header{background:#0b3d2e;color:#c9a227;padding:15px;text-align:center;font-size:1.2rem}
+.tab{display:none;padding:14px;max-width:700px;margin:auto}
+.tab.active{display:block}
+.card{background:#fff;border-radius:16px;padding:16px;margin:12px 0;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.q{font-size:1.25rem;line-height:2}
+.btn{background:#0b3d2e;color:#fff;border:0;padding:12px 20px;border-radius:10px}
+.circle{width:150px;height:150px;border:3px solid #c9a227;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:15px auto;font-size:3rem}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;border-top:1px solid #eee}
+nav button{flex:1;border:0;background:none;padding:8px;font-size:.8rem}
+nav button.on{color:#c9a227;font-weight:bold}
+.suras{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sura{border:1px solid #eee;padding:10px;border-radius:10px;text-align:center;background:#fff}
+</style>
+</head>
+<body>
+<header>🌙 نور - المصحف والأذكار</header>
+<div id="t1" class="tab active">
+<div class="card"><h3>المصحف - اختر سورة</h3><div class="suras" id="list"></div></div>
+<div class="card"><div id="view" class="q">بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ<br>اختر سورة من الأعلى</div></div>
+</div>
+<div id="t2" class="tab">
+<div class="card"><h3>أذكار الصباح</h3><p>أصبحنا وأصبح الملك لله والحمد لله<br>اللهم بك أصبحنا وبك أمسينا وبك نحيا وبك نموت وإليك النشور</p></div>
+<div class="card"><h3>أذكار المساء</h3><p>أمسينا وأمسى الملك لله والحمد لله<br>اللهم إني أسألك خير هذه الليلة</p></div>
+</div>
+<div id="t3" class="tab">
+<div class="card" style="text-align:center"><h3>المسبحة</h3><div class="circle" id="c">0</div><button class="btn" style="width:90%" onclick="doT()">سبح</button><br><br><button onclick="c=0;document.getElementById('c').textContent=0" class="btn" style="background:#eee;color:#333">تصفير</button></div>
+</div>
+<div id="t4" class="tab">
+<div class="card" style="text-align:center"><h3>القبلة</h3><div style="font-size:4rem">🕋</div><p>اتجاه القبلة من بغداد: 193° جنوب غرب</p></div>
+</div>
+<nav>
+<button class="on" onclick="op('t1',this)">📖<br>المصحف</button>
+<button onclick="op('t2',this)">🕌<br>الأذكار</button>
+<button onclick="op('t3',this)">📿<br>المسبحة</button>
+<button onclick="op('t4',this)">🧭<br>القبلة</button>
+</nav>
+<script>
+const names=["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+const list=document.getElementById('list');
+names.forEach((n,i)=>{let d=document.createElement('div');d.className='sura';d.textContent=(i+1)+'. '+n;d.onclick=()=>{document.getElementById('view').innerHTML='<b>سورة '+n+'</b><br><br>بِسْمِ اللهِ الرَّحْمَنِ الرَّحِيمِ<br>جاري عرض السورة...';window.scrollTo(0,200)};list.appendChild(d)});
+function op(id,b){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+let c=0;function doT(){c++;document.getElementById('c').textContent=c;if(navigator.vibrate)navigator.vibrate(30);}
+</script>
+</body>
+</html>
